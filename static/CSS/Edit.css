@@ -1,0 +1,79 @@
+/* Reference:W3Schools. (2025) CSS Tutorial. Available at: https://www.w3schools.com/css/ */
+/* General body */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: block;
+}
+
+/* Navbar */
+/* Reference IS3312: Advanced Programming for Information Systems (2024). */
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #007bff;
+            height: 70px;
+            padding: 0 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .nav-left img.logo {
+            height: 70px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .nav-right button {
+            background-color: white;
+            color: #007bff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-right button:hover {
+            background-color: #e6e6e6;
+        }
+/* Container */
+.container {
+    background: white;
+    max-width: 400px;
+    margin: 100px auto 40px auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-top: 100px;
+}
+
+/* Form input + buttons */
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+a {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #007bff;
+}

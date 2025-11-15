@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talent Exchange - Skills</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/base.css') }}">
+</head>
+<!-- Reference Youtube (2021).video on Flask with python template inheritance https://www.youtube.com/watch?v=AJPltKF_mSw&list=PLOkVupluCIjuPtTkhO6jmA76uQR994Wvi -->
+
+<body>
+<!-- Sidebar -->
+<div class="sidebar">
+    <!-- Home -->
+    <a href="{{ url_for('home') }}" title="Home">
+        <svg viewBox="0 0 24 24">
+            <path d="M3 9.5l9-7 9 7V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5z"></path>
+            <path d="M9 22V12h6v10"></path>
+        </svg>
+    </a>
+    <!-- Messaging -->
+    <a href="#" title="Messaging">
+        <svg viewBox="0 0 24 24">
+            <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path>
+        </svg>
+    </a>
+
+    <!-- Schedule -->
+    <a href="#" title="Schedule">
+        <svg viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+            <path d="M16 2v4M8 2v4M3 10h18"></path>
+        </svg>
+    </a>
+
+    <!-- Search -->
+    <a href="{{ url_for('search') }}" title="Search">
+        <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M20 20l-3.5-3.5"></path>
+        </svg>
+    </a>
+</div>
+<!-- Reference IS3312: Advanced Programming for Information Systems (2024). -->
+<!-- header -->
+<nav>
+    <div class="nav-left">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='images/Screenshot 2025-10-20 172925.png') }}" alt="Talent Exchange Logo" class="logo">
+        </a>
+    </div>
+    <div class="nav-right">
+        <button>Profile</button>
+        <button>Login</button>
+    </div>
+</nav>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Talent Exchange | <a href="#">Contact Us</a> | <a href="#">Ask a Query</a></p>
+        </div>
+    </footer>
+
+<div class="container">
+    <h1>Skills Added by Users</h1>
+
+    <form method="POST">
+        <input type="text" name="skill" placeholder="Enter a new skill" required>
+        <input type="text" name="username" placeholder="Enter your username" required>
+        <button type="submit">Add Skill</button>
+    </form>
+
+    {% if skills %}
+        {% for skill in skills %}
+            <div class="skill-card">
+                <div>
+                    <strong><a href="{{ url_for('skill_detail', id=skill.id) }}" style="color:#007bff; text-decoration:none;">
+                       {{ skill.name }}
+                    </a></strong><br>
+
+                    <small>Added by: {{ skill.username }}</small>
+                </div>
+                <div class="actions">
+                    <a href="{{ url_for('edit', id=skill.id) }}">Edit</a>
+                    <a href="{{ url_for('delete', id=skill.id) }}">Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No skills added yet. Add one above!</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

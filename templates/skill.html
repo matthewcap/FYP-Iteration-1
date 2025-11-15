@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ skill.name }} – Talent Exchange</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/Skill.css') }}">
+</head>
+<!-- Reference Youtube(2021). video on Flask with python template inheritance https://www.youtube.com/watch?v=AJPltKF_mSw&list=PLOkVupluCIjuPtTkhO6jmA76uQR994Wvi -->
+    <!-- Reference IS3312: Advanced Programming for Information Systems (2024). -->
+
+<body>
+<nav>
+  <div class="nav-left">
+    <a href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='images/Screenshot 2025-10-20 172925.png') }}" alt="Talent Exchange Logo" class="logo">
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="{{ url_for('home') }}"><button>Home</button></a>
+    <button>Login</button>
+    <button>Profile</button>
+  </div>
+</nav>
+
+<div class="container">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for m in messages %}
+        <div class="flash">{{ m }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <h1>{{ skill.name }}</h1>
+  <p class="muted">Added by: {{ skill.username }}</p>
+
+  <form method="POST">
+    <label for="message"><strong>Send a message about this skill</strong></label>
+    <textarea id="message" name="message" placeholder="Write your message..." required></textarea>
+    <div class="row">
+      <button type="submit" class="btn-primary">Send Message</button>
+      <a href="{{ url_for('home') }}" class="btn-link">Back to Home</a>
+    </div>
+  </form>
+
+  {% if messages and messages|length > 0 %}
+    <h3 style="margin-top:24px;">Recent messages</h3>
+    {% for item in messages %}
+      <div class="msg-card">{{ item.content }}</div>
+    {% endfor %}
+  {% endif %}
+</div>
+
+</body>
+</html>

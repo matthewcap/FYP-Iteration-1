@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Skill</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Edit.css') }}">
+
+</head>
+<!-- Reference YouTube (2021).video on Flask with python template inheritance https://www.youtube.com/watch?v=AJPltKF_mSw&list=PLOkVupluCIjuPtTkhO6jmA76uQR994Wvi -->
+<!-- Reference IS3312: Advanced Programming for Information Systems (2024). -->
+
+<body>
+<nav>
+  <div class="nav-left">
+    <a href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='images/Screenshot 2025-10-20 172925.png') }}" alt="Talent Exchange Logo" class="logo">
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="{{ url_for('home') }}"><button>Home</button></a>
+    <button>Login</button>
+    <button>Profile</button>
+  </div>
+</nav>
+<div class="container">
+    <h2>Edit Skill</h2>
+    <form method="POST">
+        <input type="text" name="skill" value="{{ skill.name }}" required>
+        <button type="submit">Save Changes</button>
+    </form>
+    <a href="{{ url_for('home') }}">← Back</a>
+</div>
+
+</body>
+</html>

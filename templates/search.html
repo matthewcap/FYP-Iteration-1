@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Skills - Talent Exchange</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/search.css') }}">
+
+</head>
+<!-- Reference Youtube (2021).video on Flask with python template inheritance https://www.youtube.com/watch?v=AJPltKF_mSw&list=PLOkVupluCIjuPtTkhO6jmA76uQR994Wvi -->
+<body>
+<div class="sidebar">
+    <!-- Home -->
+    <a href="{{ url_for('home') }}" title="Home">
+        <svg viewBox="0 0 24 24">
+            <path d="M3 9.5l9-7 9 7V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5z"></path>
+            <path d="M9 22V12h6v10"></path>
+        </svg>
+    </a>
+    <!-- Messaging -->
+    <a href="#" title="Messaging">
+        <svg viewBox="0 0 24 24">
+            <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path>
+        </svg>
+    </a>
+
+    <!-- Schedule -->
+    <a href="#" title="Schedule">
+        <svg viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+            <path d="M16 2v4M8 2v4M3 10h18"></path>
+        </svg>
+    </a>
+
+    <!-- Search -->
+    <a href="{{ url_for('search') }}" title="Search">
+        <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M20 20l-3.5-3.5"></path>
+        </svg>
+    </a>
+</div>
+    <!-- Reference IS3312: Advanced Programming for Information Systems (2024). -->
+<nav>
+    <div class="nav-left">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='images/Screenshot 2025-10-20 172925.png') }}" alt="Talent Exchange Logo" class="logo">
+        </a>
+    </div>
+    <div class="nav-right">
+        <button>Profile</button>
+        <button>Login</button>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>Search Skills</h1>
+
+    <form class="search-form" method="GET" action="{{ url_for('search') }}">
+        <input type="text" name="q" placeholder="Type a skill (e.g., Piano, Python, Painting)" value="{{ q or '' }}" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if q %}
+  <p class="meta">Results for: <strong>{{ q }}</strong> — {{ results|length }} found</p>
+
+  {% if results %}
+    {% for s in results %}
+      <div class="result-card">
+        <div>
+          <strong>
+            <a href="{{ url_for('skill_detail', id=s.id) }}" style="color:#007bff; text-decoration:none;">
+              {{ s.name }}
+            </a>
+          </strong><br>
+          {% if s.username is defined %}
+            <small>Added by: {{ s.username }}</small>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No matching skills. Try another term.</p>
+  {% endif %}
+
+  <a class="backlink" href="{{ url_for('search') }}">Clear search</a>
+{% else %}
+  <p class="meta">Start by typing a skill above to find matches.</p>
+{% endif %}
+
+    <a class="backlink" href="{{ url_for('home') }}">← Back to Home</a>
+</div>
+</body>
+</html>
