@@ -89,18 +89,101 @@ body {
         .nav-right button:hover {
             background-color: #e6e6e6;
         }
+        /* teacher Card */
+.teacher-card {
+    background: #ffffff;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin: 100px auto 40px auto;
+    max-width: 600px;
+    border-left: 6px solid #007bff;
+}
+
+.teacher-card strong {
+    font-size: 22px;
+    color: #007bff;
+}
+
+.teacher-card small {
+    display: block;
+    font-size: 15px;
+    color: #555;
+    margin-top: 4px;
+}
+
+.teacher-card .label {
+    font-weight: bold;
+    color: #333;
+}
+
+.backlink {
+    display: inline-block;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.backlink:hover {
+    text-decoration: underline;
+}
+
+.learn-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin: 100px;
+}
+
+.learn-container h2 {
+    color: #007bff;
+}
+
+.learn-list {
+    list-style: none;
+    padding: 0;
+}
+
+.learn-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 2px;
+    border-radius: 5px;
+    margin: 5px 0;
+    border-left: 4px solid #007bff;
+}
+.learn-remove-form {
+    display: inline;
+}
+
+.learn-remove-form .remove-btn {
+    all: unset;
+    display: inline-block;
+    padding: 4px 8px;
+    background: #ff4d4d;
+    color: white;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.learn-remove-form .remove-btn:hover {
+    background: #e60000;
+}
 
         /* Content */
         .container {
             max-width: 700px;
-            margin: 100px auto 40px auto; /* moved down for navbar */
+            margin: 100px auto 40px auto;
             background: white;
             padding: 25px;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-left: 120px; /* Added space for sidebar */
+            margin-left: 120px;
         }
-
         h1 {
             color: #007bff;
         }
@@ -204,3 +287,33 @@ body {
         .meta { color:#666; font-size: 14px; }
         .backlink { display:inline-block; margin-top:12px; color:#007bff; text-decoration:none; }
         .backlink:hover { text-decoration:underline; }
+        .login-prompt {
+    background: #ffffff;
+    border-left: 5px solid #007bff;
+    padding: 20px;
+    margin: 100px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.login-prompt p {
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #333;
+}
+.login-btn,
+.register-btn {
+    display: inline-block;
+    background-color: #007bff;
+    padding: 8px 16px;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.login-btn:hover,
+.register-btn:hover {
+    background-color: #0056b3;
+}

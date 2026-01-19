@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='CSS/search.css') }}">
 
 </head>
-<!-- Reference Youtube (2021).video on Flask with python template inheritance https://www.youtube.com/watch?v=AJPltKF_mSw&list=PLOkVupluCIjuPtTkhO6jmA76uQR994Wvi -->
+<!-- Reference YouTube (2021).video on Flask with python template inheritance https://www.youtube.com/watch?v=AJPltKF_mSw&list=PLOkVupluCIjuPtTkhO6jmA76uQR994Wvi -->
 <body>
 <div class="sidebar">
     <!-- Home -->
@@ -18,7 +18,7 @@
         </svg>
     </a>
     <!-- Messaging -->
-    <a href="#" title="Messaging">
+    <a href="{{ url_for('inbox') }}" title="Messaging">
         <svg viewBox="0 0 24 24">
             <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path>
         </svg>
@@ -48,8 +48,22 @@
         </a>
     </div>
     <div class="nav-right">
-        <button>Profile</button>
-        <button>Login</button>
+        {% if current_user.is_authenticated %}
+        <span class="welcome-text">Hello, {{ current_user.username }}</span>
+        <a href="{{ url_for('profile') }}">
+            <button class="nav-btn">Profile</button>
+        </a>
+        <a href="{{ url_for('logout') }}">
+            <button class="nav-btn">Logout</button>
+        </a>
+    {% else %}
+        <a href="{{ url_for('login') }}">
+            <button class="nav-btn">Login</button>
+        </a>
+        <a href="{{ url_for('register') }}">
+            <button class="nav-btn">Register</button>
+        </a>
+        {% endif %}
     </div>
 </nav>
 
@@ -64,29 +78,27 @@
     {% if q %}
   <p class="meta">Results for: <strong>{{ q }}</strong> — {{ results|length }} found</p>
 
-  {% if results %}
-    {% for s in results %}
-      <div class="result-card">
-        <div>
-          <strong>
-            <a href="{{ url_for('skill_detail', id=s.id) }}" style="color:#007bff; text-decoration:none;">
-              {{ s.name }}
+    {% if results %}
+        {% for r in results %}
+            <div class="result-card">
+    <div>
+        <strong>
+            <a href="{{ url_for('skill_view_single', skill=r.skill, user_id=r.teacher_id) }}">
+                {{ r.skill }}
             </a>
-          </strong><br>
-          {% if s.username is defined %}
-            <small>Added by: {{ s.username }}</small>
-          {% endif %}
-        </div>
-      </div>
-    {% endfor %}
-  {% else %}
-    <p>No matching skills. Try another term.</p>
-  {% endif %}
-
-  <a class="backlink" href="{{ url_for('search') }}">Clear search</a>
-{% else %}
-  <p class="meta">Start by typing a skill above to find matches.</p>
+        </strong><br>
+        <small>Taught by: {{ r.teacher }}</small><br>
+        <small>Country: {{ r.country }}</small><br>
+        <small>Language: {{ r.language }}</small>
+    </div>
+</div>
+        {% endfor %}
+    {% else %}
+        <p>No skills match your search.</p>
+    {% endif %}
 {% endif %}
+
+
 
     <a class="backlink" href="{{ url_for('home') }}">← Back to Home</a>
 </div>

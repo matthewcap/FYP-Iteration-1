@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talent Exchange - Skills</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/edit.css') }}">
 </head>
-<!-- Reference YouTube (2021).video on Flask with python template inheritance https://www.youtube.com/watch?v=AJPltKF_mSw&list=PLOkVupluCIjuPtTkhO6jmA76uQR994Wvi -->
-
 <body>
 <!-- Sidebar -->
 <div class="sidebar">
@@ -75,38 +68,18 @@
         </div>
     </footer>
 
-{% if current_user.is_authenticated %}
-<div class="learn-container">
-    <h2>Skills You Want to Learn</h2>
-
-    <form method="POST" action="{{ url_for('add_learn_skill') }}">
-        <input type="text" name="learn_skill" placeholder="Enter a skill" required>
-        <button type="submit">Add Skill</button>
-    </form>
-
-    {% if current_user.learn_skills %}
-        <ul class="learn-list">
-    {% for skill in current_user.learn_skills.split(', ') %}
-        <li>
-            {{ skill }}
-            <form method="POST" action="{{ url_for('remove_learn_skill') }}" class="learn-remove-form">
-                <input type="hidden" name="skill" value="{{ skill }}">
-                <button type="submit" class="remove-btn">✖</button>
-            </form>
-        </li>
+<div class="messages-box">
+<h2>Conversation with {{ other_user.username }}</h2>
+    {% for m in messages %}
+        <div class="msg {% if m.sender_id == current_user.id %}sent{% else %}received{% endif %}">
+            <p>{{ m.content }}</p>
+            <small>{{ m.timestamp }}</small>
+        </div>
     {% endfor %}
-</ul>
+</div>
 
-    {% else %}
-        <p>You have not added any skills yet.</p>
-    {% endif %}
-</div>
-{% else %}
-<div class="login-prompt">
-    <p>You must be logged in to access all features.</p>
-    <a href="{{ url_for('login') }}" class="login-btn">Login</a>
-    <a href="{{ url_for('register') }}" class="register-btn">Register</a>
-</div>
-{% endif %}
+<form method="POST" class="message-form">
+    <textarea name="content" placeholder="Type your message..." required></textarea>
+    <button type="submit">Send</button>
+</form>
 </body>
-</html>
