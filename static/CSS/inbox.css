@@ -1,0 +1,174 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+/* Reference IS3312: Advanced Programming for Information Systems (2024). */
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #007bff;
+            height: 70px;
+            padding: 0 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+        }
+
+        .nav-left img.logo {
+            height: 70px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .nav-right button {
+            background-color: white;
+            color: #007bff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-right button:hover {
+            background-color: #e6e6e6;
+        }
+/* Container */
+.container {
+    max-width: 700px;
+    margin: 120px;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Inbox title */
+h1 {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+/* Message list */
+.msg-list {
+    list-style: none;
+    padding: 0;
+}
+
+.msg-list li {
+    margin-bottom: 15px;
+}
+
+.msg-card {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 5px solid #007bff;
+    transition: background 0.2s ease;
+}
+
+.msg-card:hover {
+    background: #eef5ff;
+}
+
+.msg-card strong {
+    font-size: 18px;
+    color: #007bff;
+}
+
+.msg-card p {
+    margin: 5px 0;
+}
+
+.msg-card small {
+    color: #666;
+    font-size: 12px;
+}
+
+.empty {
+    color: #777;
+    font-style: italic;
+    padding-top: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+/* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 80px;
+            height: calc(100vh - 70px);
+            background-color: #ffffff;
+            border-right: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            gap: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        .sidebar a {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: #f9f9f9;
+            transition: background 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background: #eaf3ff;
+            transform: translateY(-2px);
+        }
+
+        .sidebar svg {
+            width: 26px;
+            height: 26px;
+            stroke: #007bff;
+            stroke-width: 2;
+            fill: none;
+        }
+        /* Footer Styles */
+        footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 15px 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: underline;
+            margin: 0 6px;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: #dfe9ff;
+        }
+
+        .footer-content {
+            font-size: 14px;
+        }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/base.css') }}">
+</head>
+
+<body>
+<!-- Reference IS3312: Advanced Programming for Information Systems (2024). -->
+<!-- header -->
+<nav>
+    <div class="nav-left">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='images/Screenshot 2025-10-20 172925.png') }}" alt="Talent Exchange Logo" class="logo">
+        </a>
+    </div>
+        <div class="nav-right">
+        {% if current_user.is_authenticated %}
+        <span class="welcome-text">Hello, {{ current_user.username }}</span>
+        <a href="{{ url_for('profile') }}">
+            <button class="nav-btn">Profile</button>
+        </a>
+        <a href="{{ url_for('logout') }}">
+            <button class="nav-btn">Logout</button>
+        </a>
+    {% else %}
+        <a href="{{ url_for('login') }}">
+            <button class="nav-btn">Login</button>
+        </a>
+        <a href="{{ url_for('register') }}">
+            <button class="nav-btn">Register</button>
+        </a>
+        {% endif %}
+    </div>
+</nav>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Talent Exchange | <a href="#">Contact Us</a> | <a href="#">Ask a Query</a></p>
+        </div>
+    </footer>
+
+<div class="container">
+    <h2>Login</h2>
+    <form method="POST">
+        <input type="text" name="username" placeholder="Username" required><br><br>
+        <input type="password" name="password" placeholder="Password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+    <p>Don’t have an account? <a href="{{ url_for('register') }}">Register</a></p>
+    {% with messages = get_flashed_messages() %}
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    {% endwith %}
+</div>
+</body>
+</html>

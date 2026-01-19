@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ skill }} – Teacher</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/base.css') }}">
+</head>
+<body>
+
+<h1>{{ skill }}</h1>
+<!-- Reference IS3312: Advanced Programming for Information Systems (2024). -->
+<!-- header -->
+<nav>
+    <div class="nav-left">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='images/Screenshot 2025-10-20 172925.png') }}" alt="Talent Exchange Logo" class="logo">
+        </a>
+    </div>
+        <div class="nav-right">
+        {% if current_user.is_authenticated %}
+        <span class="welcome-text">Hello, {{ current_user.username }}</span>
+        <a href="{{ url_for('profile') }}">
+            <button class="nav-btn">Profile</button>
+        </a>
+        <a href="{{ url_for('logout') }}">
+            <button class="nav-btn">Logout</button>
+        </a>
+    {% else %}
+        <a href="{{ url_for('login') }}">
+            <button class="nav-btn">Login</button>
+        </a>
+        <a href="{{ url_for('register') }}">
+            <button class="nav-btn">Register</button>
+        </a>
+        {% endif %}
+    </div>
+</nav>
+<!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Talent Exchange | <a href="#">Contact Us</a> | <a href="#">Ask a Query</a></p>
+        </div>
+    </footer>
+
+
+<div class="teacher-card">
+
+    <h1>{{ user.full_name or user.username }}</h1>
+
+    {% if user.age %}
+        <p>Age: {{ user.age }}</p>
+    {% else %}
+        <p>Age: Not provided</p>
+    {% endif %}
+
+    <p>Country: {{ user.country or 'Not provided' }}</p>
+    <p>Language: {{ user.language or 'Not provided' }}</p>
+
+    <p>Teaches: {{ user.teach_skills or 'No skills listed' }}</p>
+
+    <p>Wants to Learn:
+        {% if user.learn_skills %}
+            {{ user.learn_skills }}
+        {% else %}
+            Nothing listed
+        {% endif %}
+    </p>
+<a class="message-btn" href="{{ url_for('message_user', user_id=user.id) }}">Message</a>
+
+<a href="{{ url_for('search')}}"> ← Back to search</a>
+
+</div>
+</body>
+</html>

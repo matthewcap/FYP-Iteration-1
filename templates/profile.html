@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/profile.css') }}">
+</head>
+<body>
+<!-- Reference IS3312: Advanced Programming for Information Systems (2024). -->
+<!-- header -->
+<nav>
+    <div class="nav-left">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='images/Screenshot 2025-10-20 172925.png') }}" alt="Talent Exchange Logo" class="logo">
+        </a>
+    </div>
+        <div class="nav-right">
+        {% if current_user.is_authenticated %}
+        <span class="welcome-text">Hello, {{ current_user.username }}</span>
+        <a href="{{ url_for('profile') }}">
+            <button class="nav-btn">Profile</button>
+        </a>
+        <a href="{{ url_for('logout') }}">
+            <button class="nav-btn">Logout</button>
+        </a>
+    {% else %}
+        <a href="{{ url_for('login') }}">
+            <button class="nav-btn">Login</button>
+        </a>
+        <a href="{{ url_for('register') }}">
+            <button class="nav-btn">Register</button>
+        </a>
+        {% endif %}
+    </div>
+</nav>
+<div class="profile-container">
+    <h2>Your Profile</h2>
+
+    <form method="POST">
+
+        <label>Full Name</label><br>
+        <input type="text" name="full_name"
+               value="{{ user.full_name or '' }}" required><br><br>
+
+        <label>Country / Region</label><br>
+        <input type="text" name="country"
+               value="{{ user.country or '' }}" required><br><br>
+
+        <label>Date of Birth</label><br>
+        <input type="date" name="dob"
+               value="{{ user.dob or '' }}"><br><br>
+
+        <label>Language</label><br>
+        <input type="text" name="language"
+               value="{{ user.language or '' }}" required><br><br>
+
+        <label>Skills You Teach</label><br>
+        <input type="text" name="skill1" placeholder="Skill 1" value="{{ (user.teach_skills.split(', ')[0]) if user.teach_skills else '' }}">
+        <input type="text" name="skill2" placeholder="Skill 2" value="{{ (user.teach_skills.split(', ')[1]) if user.teach_skills and user.teach_skills.split(', ')|length > 1 else '' }}">
+        <input type="text" name="skill3" placeholder="Skill 3" value="{{ (user.teach_skills.split(', ')[2]) if user.teach_skills and user.teach_skills.split(', ')|length > 2 else '' }}">
+        <input type="text" name="skill4" placeholder="Skill 4" value="{{ (user.teach_skills.split(', ')[3]) if user.teach_skills and user.teach_skills.split(', ')|length > 3 else '' }}">
+        <input type="text" name="skill5" placeholder="Skill 5" value="{{ (user.teach_skills.split(', ')[4]) if user.teach_skills and user.teach_skills.split(', ')|length > 4 else '' }}">
+
+
+        <button type="submit">Save Profile</button>
+
+    </form>
+
+    <p><a href="{{ url_for('home') }}">← Back to Home</a></p>
+
+    {% with messages = get_flashed_messages() %}
+      {% for m in messages %}
+        <p>{{ m }}</p>
+      {% endfor %}
+    {% endwith %}
+</div>
+<!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Talent Exchange | <a href="#">Contact Us</a> | <a href="#">Ask a Query</a></p>
+        </div>
+    </footer>
+</body>
+</html>
