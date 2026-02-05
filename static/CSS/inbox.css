@@ -2,6 +2,8 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
+    color: #333;
+    display: block;
 }
 /* Reference IS3312: Advanced Programming for Information Systems (2024). */
 
@@ -171,4 +173,31 @@ a {
 
         .footer-content {
             font-size: 14px;
+        }
+        .btn-row{
+  display: inline-flex;
+  gap: 8px;   /* controls spacing */
+  align-items: center;
+}
+.btn-row button{
+  line-height: 1;
+  padding: 8px 12px;
+}
+.btn-link{
+  display: inline-flex;     /* makes <a> wrap the button cleanly */
+  align-items: center;
+  text-decoration: none;    /* removes underline spacing issues */
+}
+.btn-row form{
+  margin: 0;  /* forms often have default margins */
+}
+.channel-btn {
+            background-color: white;
+            color: #007bff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }

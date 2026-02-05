@@ -49,9 +49,14 @@
             <img src="{{ url_for('static', filename='images/Screenshot 2025-10-20 172925.png') }}" alt="Talent Exchange Logo" class="logo">
         </a>
     </div>
+{% if current_user.is_authenticated %}
+    <a href="{{ url_for('channel') }}"><button class="channel-btn">My Channel</button></a>
+{% endif %}
+
         <div class="nav-right">
+        <div class="btn-row">
         {% if current_user.is_authenticated %}
-        <span class="welcome-text">Hello, {{ current_user.username }} </span>
+        <span class="welcome-text">logged in as {{ current_user.username }} </span>
         <a href="{{ url_for('profile') }}">
             <button class="nav-btn">Profile</button>
         </a>
@@ -66,6 +71,7 @@
             <button class="nav-btn">Register</button>
         </a>
         {% endif %}
+        </div>
     </div>
 </nav>
     <!-- Footer -->
@@ -75,38 +81,39 @@
         </div>
     </footer>
 
-{% if current_user.is_authenticated %}
-<div class="learn-container">
-    <h2>Skills You Want to Learn</h2>
+<div class="main-container">
+<h2>Browse by Category</h2>
 
-    <form method="POST" action="{{ url_for('add_learn_skill') }}">
-        <input type="text" name="learn_skill" placeholder="Enter a skill" required>
-        <button type="submit">Add Skill</button>
-    </form>
-
-    {% if current_user.learn_skills %}
-        <ul class="learn-list">
-    {% for skill in current_user.learn_skills.split(', ') %}
-        <li>
-            {{ skill }}
-            <form method="POST" action="{{ url_for('remove_learn_skill') }}" class="learn-remove-form">
-                <input type="hidden" name="skill" value="{{ skill }}">
-                <button type="submit" class="remove-btn">✖</button>
-            </form>
-        </li>
-    {% endfor %}
-</ul>
-
-    {% else %}
-        <p>You have not added any skills yet.</p>
-    {% endif %}
+<div class="category-row">
+  {% for cat in categories %}
+    <a href="{{ url_for('home', category=cat) }}"
+       class="category-chip {% if selected_category == cat %}active{% endif %}">
+      {{ cat }}
+    </a>
+  {% endfor %}
 </div>
-{% else %}
-<div class="login-prompt">
-    <p>You must be logged in to access all features.</p>
-    <a href="{{ url_for('login') }}" class="login-btn">Login</a>
-    <a href="{{ url_for('register') }}" class="register-btn">Register</a>
+
+<h2>
+  {% if selected_category %}
+    {{ selected_category }} Videos
+  {% else %}
+    Latest Uploads
+  {% endif %}
+</h2>
+
+<div class="uploads-grid">
+  {% for c in uploads %}
+    <div class="upload-card">
+      <strong>{{ c.title }}</strong>
+      <p>{{ c.category }}</p>
+      <p>Views: {{ c.views }}</p>
+      <a href="{{ url_for('view_content', content_id=c.id) }}">Open</a>
+    </div>
+  {% else %}
+    <p>No uploads found.</p>
+  {% endfor %}
 </div>
-{% endif %}
+</div>
+
 </body>
 </html>
